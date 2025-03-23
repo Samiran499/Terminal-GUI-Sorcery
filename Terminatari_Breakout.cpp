@@ -121,7 +121,7 @@ int main()
         mvprintw(max_y - 2, mySlider.x, "%s", mySlider.figs);
         refresh();
 
-        if(!collision(myBall))
+        if(!collision(myBall)) // If no collision move ball
         {
             myBall.x += myBall.dx;
             myBall.y += myBall.dy;
@@ -129,7 +129,7 @@ int main()
 
         char input = getch();
       
-        if(input == 'p' || input == 'P')
+        if(input == 'p' || input == 'P') // For pausing
         {
             while(true)
             {
@@ -166,8 +166,6 @@ int main()
         if(myBall.y <= 0) myBall.dy *= -1;
         refresh();
     }
-
-    getch();
 
     endwin();
     return 0;
