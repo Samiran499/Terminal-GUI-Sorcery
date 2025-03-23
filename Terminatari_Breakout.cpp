@@ -128,21 +128,38 @@ int main()
         }
 
         char input = getch();
-
-        if(input == 'm')
+      
+        if(input == 'p' || input == 'P')
         {
-            mySlider.x += mySlider.dx;
+            while(true)
+            {
+                mvprintw(myBall.y, myBall.x, "PAUSED!");
+                refresh();
+                usleep(1000);
+                mvprintw(myBall.y, myBall.x, "       ");
+                if(getch() == 'p' || getch() == 'P') break;
+            }
+        }
+        else if(input == 'd' || input == 'D')
+        {
+            if(mySlider.x < max_x - 60)
+            {
+                mySlider.x += mySlider.dx;
+            }
             mvprintw(max_y - 2, mySlider.x - mySlider.dx, "%s", mySlider.spaces);
         }
-        else if(input == 'n')
+        else if(input == 'a' || input == 'A')
         {
-            mySlider.x -= mySlider.dx;
+            if(mySlider.x >= 10)
+            {
+                mySlider.x -= mySlider.dx;
+            }
             mvprintw(max_y - 2, mySlider.x + mySlider.dx, "%s", mySlider.spaces);
         }
-        else if(input == 'q') break;
+        else if(input == 'q' || input == 'Q') break;
         if(myBall.y > max_y - 1) break;
 
-        usleep(50000);
+        usleep(40000);
         mvprintw(myBall.y - myBall.dy, myBall.x - myBall.dx, " ");
         if((myBall.x >= mySlider.x && myBall.x < mySlider.x + 50) && myBall.y > max_y - 4) myBall.dy *= -1;
         if(myBall.x <= 0 || myBall.x >= max_x - 1) myBall.dx *= -1;
